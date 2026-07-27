@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración | Kharit</title>
+    <meta name="description" content="Configuración general del sistema Kharit: empresa, impuestos, moneda y respaldos.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="configuracion.html" aria-current="page">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Configuración</h1>
+
+        <!-- Contenedor único con anclas internas en vez de 4 archivos separados: reduce redundancia sin perder organización -->
+        <nav class="subnav" aria-label="Secciones de configuración">
+            <ul>
+                <li><a href="#empresa">Empresa</a></li>
+                <li><a href="#impuestos">Impuestos</a></li>
+                <li><a href="#moneda">Moneda</a></li>
+                <li><a href="#respaldos">Respaldos</a></li>
+            </ul>
+        </nav>
+
+        <section id="empresa" aria-labelledby="tituloEmpresa" data-supabase-table="configuracion_empresa">
+            <h2 id="tituloEmpresa">Datos de la empresa</h2>
+            <form id="formConfiguracionEmpresa" class="form-entity" action="#" method="post" data-supabase-table="configuracion_empresa" autocomplete="off" novalidate>
+                <fieldset>
+                    <legend>Información fiscal y de contacto</legend>
+
+                    <div class="form-group">
+                        <label for="nombreEmpresa">Nombre / razón social</label>
+                        <input type="text" id="nombreEmpresa" name="nombre_empresa" maxlength="150" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rfcEmpresa">RFC</label>
+                        <input type="text" id="rfcEmpresa" name="rfc_empresa" maxlength="13" pattern="[A-Za-z0-9]{10,13}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccionEmpresa">Dirección fiscal</label>
+                        <textarea id="direccionEmpresa" name="direccion_empresa" rows="3" maxlength="250"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefonoEmpresa">Teléfono</label>
+                        <input type="tel" id="telefonoEmpresa" name="telefono_empresa" maxlength="15" pattern="[0-9+\-\s]*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logoEmpresa">Logo de la empresa</label>
+                        <input type="file" id="logoEmpresa" name="logo" accept="image/png, image/jpeg, image/svg+xml">
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" id="btnGuardarEmpresa" class="btn-primary">Guardar datos de empresa</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="impuestos" aria-labelledby="tituloImpuestos" data-supabase-table="configuracion_impuestos">
+            <h2 id="tituloImpuestos">Impuestos</h2>
+            <form id="formConfiguracionImpuestos" class="form-entity" action="#" method="post" data-supabase-table="configuracion_impuestos" autocomplete="off" novalidate>
+                <fieldset>
+                    <legend>Tasas de impuestos aplicables</legend>
+
+                    <div class="form-group">
+                        <label for="nombreImpuesto">Nombre del impuesto</label>
+                        <input type="text" id="nombreImpuesto" name="nombre_impuesto" placeholder="Ej. IVA" maxlength="40">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="porcentajeImpuesto">Porcentaje</label>
+                        <input type="number" id="porcentajeImpuesto" name="porcentaje" min="0" max="100" step="0.01" placeholder="16.00">
+                    </div>
+
+                    <div class="form-group form-group-inline">
+                        <input type="checkbox" id="impuestoActivoPorDefecto" name="activo_por_defecto">
+                        <label for="impuestoActivoPorDefecto">Aplicar por defecto en nuevas ventas</label>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" id="btnGuardarImpuestos" class="btn-primary">Guardar impuestos</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="moneda" aria-labelledby="tituloMoneda" data-supabase-table="configuracion_moneda">
+            <h2 id="tituloMoneda">Moneda</h2>
+            <form id="formConfiguracionMoneda" class="form-entity" action="#" method="post" data-supabase-table="configuracion_moneda" autocomplete="off" novalidate>
+                <fieldset>
+                    <legend>Moneda base del sistema</legend>
+
+                    <div class="form-group">
+                        <label for="monedaBase">Moneda</label>
+                        <select id="monedaBase" name="moneda_base" required>
+                            <option value="MXN">Peso mexicano (MXN)</option>
+                            <option value="USD">Dólar estadounidense (USD)</option>
+                            <option value="EUR">Euro (EUR)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="simboloMoneda">Símbolo</label>
+                        <input type="text" id="simboloMoneda" name="simbolo_moneda" maxlength="5" placeholder="$">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="formatoDecimales">Decimales a mostrar</label>
+                        <input type="number" id="formatoDecimales" name="decimales" min="0" max="4" step="1" value="2">
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" id="btnGuardarMoneda" class="btn-primary">Guardar moneda</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="respaldos" aria-labelledby="tituloRespaldos" data-supabase-table="configuracion_respaldos">
+            <h2 id="tituloRespaldos">Respaldos</h2>
+            <p>Respaldo y exportación de datos de negocio (independiente de los respaldos de infraestructura que gestiona Supabase).</p>
+
+            <table class="table-backups">
+                <caption>Historial de respaldos generados</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Tamaño</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaRespaldosBody">
+                    <tr>
+                        <td colspan="4">Aún no se han generado respaldos.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="form-actions">
+                <button type="button" id="btnGenerarRespaldo" class="btn-primary">Generar respaldo ahora</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar producto | Kharit</title>
+    <meta name="description" content="Editar la información de un producto existente en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="productos.html" aria-current="page">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Editar producto</h1>
+
+        <form id="formProductoEditar" class="form-entity" action="#" method="post" data-supabase-table="productos" data-supabase-action="update" autocomplete="off" novalidate>
+            <input type="hidden" id="productoId" name="producto_id" value="">
+
+            <fieldset>
+                <legend>Datos generales</legend>
+
+                <div class="form-group">
+                    <label for="nombreProducto">Nombre del producto</label>
+                    <input type="text" id="nombreProducto" name="nombre_producto" maxlength="120" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="skuProducto">SKU</label>
+                    <input type="text" id="skuProducto" name="sku" maxlength="40" pattern="[A-Za-z0-9\-]+" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="codigoBarras">Código de barras</label>
+                    <input type="text" id="codigoBarras" name="codigo_barras" maxlength="30" pattern="[0-9]*">
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcionProducto">Descripción</label>
+                    <textarea id="descripcionProducto" name="descripcion" rows="4" maxlength="500"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoriaProducto">Categoría</label>
+                    <select id="categoriaProducto" name="categoria_id" required>
+                        <option value="">Selecciona una categoría</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="proveedorProducto">Proveedor</label>
+                    <select id="proveedorProducto" name="proveedor_id" required>
+                        <option value="">Selecciona un proveedor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="unidadMedida">Unidad de medida</label>
+                    <select id="unidadMedida" name="unidad_medida" required>
+                        <option value="pieza">Pieza</option>
+                        <option value="caja">Caja</option>
+                        <option value="kg">Kilogramo</option>
+                        <option value="litro">Litro</option>
+                        <option value="paquete">Paquete</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="imagenProducto">Imagen del producto</label>
+                    <input type="file" id="imagenProducto" name="imagen" accept="image/png, image/jpeg, image/webp">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Precios</legend>
+
+                <div class="form-group">
+                    <label for="precioCompra">Precio de compra</label>
+                    <input type="number" id="precioCompra" name="precio_compra" min="0" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="precioVenta">Precio de venta</label>
+                    <input type="number" id="precioVenta" name="precio_venta" min="0" step="0.01" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Inventario</legend>
+
+                <div class="form-group">
+                    <label for="stockActual">Stock actual</label>
+                    <input type="number" id="stockActual" name="stock_actual" min="0" step="1" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="stockMinimo">Stock mínimo</label>
+                    <input type="number" id="stockMinimo" name="stock_minimo" min="0" step="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estadoProducto">Estado</label>
+                    <select id="estadoProducto" name="estado" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnActualizarProducto" class="btn-primary">Guardar cambios</button>
+                <a href="producto_detalle.html" id="enlaceCancelarEdicion" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

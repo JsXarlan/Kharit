@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de inventario | Kharit</title>
+    <meta name="description" content="Auditoría histórica de movimientos de inventario en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="inventario_movimientos.html" aria-current="page">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Historial de inventario</h1>
+
+        <nav class="subnav" aria-label="Submenú de inventario">
+            <ul>
+                <li><a href="inventario_movimientos.html">Movimientos</a></li>
+                <li><a href="inventario_entrada.html">Registrar entrada</a></li>
+                <li><a href="inventario_salida.html">Registrar salida</a></li>
+                <li><a href="inventario_ajuste.html">Registrar ajuste</a></li>
+                <li><a href="inventario_historial.html" aria-current="page">Historial completo</a></li>
+            </ul>
+        </nav>
+
+        <section class="section-toolbar" aria-labelledby="tituloFiltros">
+            <h2 id="tituloFiltros" class="visually-hidden">Filtrar historial</h2>
+            <form id="formFiltrarHistorial" class="form-search" action="#" method="get" role="search">
+                <fieldset>
+                    <legend>Filtros de auditoría</legend>
+
+                    <div class="form-group">
+                        <label for="filtrarProductoHistorial">Producto</label>
+                        <select id="filtrarProductoHistorial" name="producto_id">
+                            <option value="">Todos los productos</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filtrarUsuarioHistorial">Usuario</label>
+                        <select id="filtrarUsuarioHistorial" name="usuario_id">
+                            <option value="">Todos los usuarios</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filtrarTipoHistorial">Tipo de movimiento</label>
+                        <select id="filtrarTipoHistorial" name="tipo_movimiento">
+                            <option value="">Todos</option>
+                            <option value="entrada">Entrada</option>
+                            <option value="salida">Salida</option>
+                            <option value="ajuste">Ajuste</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filtrarFechaInicioHistorial">Desde</label>
+                        <input type="date" id="filtrarFechaInicioHistorial" name="fecha_inicio">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filtrarFechaFinHistorial">Hasta</label>
+                        <input type="date" id="filtrarFechaFinHistorial" name="fecha_fin">
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" id="btnFiltrarHistorial" class="btn-primary">Filtrar</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="section-listado" aria-labelledby="tituloHistorialCompleto" data-supabase-table="movimientos_inventario">
+            <h2 id="tituloHistorialCompleto">Historial completo</h2>
+            <table class="table-history">
+                <caption>Registro histórico de todos los movimientos de inventario</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Motivo</th>
+                        <th scope="col">Justificación</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaHistorialBody">
+                    <tr>
+                        <td colspan="7">Aún no hay movimientos registrados en el historial.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos | Kharit</title>
+    <meta name="description" content="Listado de productos registrados en el inventario de Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="productos.html" aria-current="page">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Productos</h1>
+
+        <section class="section-toolbar" aria-labelledby="tituloBusqueda">
+            <h2 id="tituloBusqueda" class="visually-hidden">Buscar y filtrar productos</h2>
+            <form id="formBuscarProductos" class="form-search" action="#" method="get" role="search">
+                <div class="form-group">
+                    <label for="buscarProducto">Buscar producto</label>
+                    <input type="search" id="buscarProducto" name="buscar" placeholder="Nombre, SKU o código de barras" maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="filtrarCategoria">Categoría</label>
+                    <select id="filtrarCategoria" name="categoria_id">
+                        <option value="">Todas las categorías</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="filtrarProveedor">Proveedor</label>
+                    <select id="filtrarProveedor" name="proveedor_id">
+                        <option value="">Todos los proveedores</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="filtrarEstado">Estado</label>
+                    <select id="filtrarEstado" name="estado">
+                        <option value="">Todos</option>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                        <option value="stock_bajo">Stock bajo</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="btnBuscarProductos" class="btn-primary">Buscar</button>
+                    <a href="producto_nuevo.html" id="enlaceNuevoProducto" class="btn-primary">Agregar producto</a>
+                </div>
+            </form>
+        </section>
+
+        <section class="section-listado" aria-labelledby="tituloListado" data-supabase-table="productos">
+            <h2 id="tituloListado">Listado de productos</h2>
+            <table class="table-products">
+                <caption>Productos registrados en el inventario</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">SKU</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Stock actual</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaProductosBody">
+                    <tr>
+                        <td>SKU-0001</td>
+                        <td>Producto de ejemplo</td>
+                        <td>Sin categoría</td>
+                        <td>$0.00</td>
+                        <td>0</td>
+                        <td>Activo</td>
+                        <td>
+                            <a href="producto_detalle.html">Ver</a>
+                            <a href="producto_editar.html">Editar</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">Total de productos: <span id="totalProductosListado">1</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

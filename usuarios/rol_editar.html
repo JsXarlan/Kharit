@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar rol | Kharit</title>
+    <meta name="description" content="Editar un rol existente en el sistema Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="usuarios.html" aria-current="page">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Editar rol</h1>
+
+        <nav class="subnav" aria-label="Submenú de usuarios">
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="roles.html" aria-current="page">Roles</a></li>
+                <li><a href="permisos.html">Permisos</a></li>
+            </ul>
+        </nav>
+
+        <form id="formRolEditar" class="form-entity" action="#" method="post" data-supabase-table="roles" data-supabase-action="update" autocomplete="off" novalidate>
+            <input type="hidden" id="rolId" name="rol_id" value="">
+
+            <fieldset>
+                <legend>Datos del rol</legend>
+
+                <div class="form-group">
+                    <label for="nombreRol">Nombre del rol</label>
+                    <input type="text" id="nombreRol" name="nombre_rol" maxlength="60" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcionRol">Descripción</label>
+                    <textarea id="descripcionRol" name="descripcion" rows="3" maxlength="300"></textarea>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnActualizarRol" class="btn-primary">Guardar cambios</button>
+                <a href="roles.html" id="enlaceCancelarEdicionRol" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

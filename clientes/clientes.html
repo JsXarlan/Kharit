@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes | Kharit</title>
+    <meta name="description" content="Listado de clientes registrados en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="clientes.html" aria-current="page">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Clientes</h1>
+
+        <section class="section-toolbar" aria-labelledby="tituloBusqueda">
+            <h2 id="tituloBusqueda" class="visually-hidden">Buscar clientes</h2>
+            <form id="formBuscarClientes" class="form-search" action="#" method="get" role="search">
+                <div class="form-group">
+                    <label for="buscarCliente">Buscar cliente</label>
+                    <input type="search" id="buscarCliente" name="buscar" placeholder="Nombre, RFC o correo" maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="filtrarEstadoCliente">Estado</label>
+                    <select id="filtrarEstadoCliente" name="estado">
+                        <option value="">Todos</option>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="btnBuscarClientes" class="btn-primary">Buscar</button>
+                    <a href="cliente_nuevo.html" id="enlaceNuevoCliente" class="btn-primary">Agregar cliente</a>
+                </div>
+            </form>
+        </section>
+
+        <section class="section-listado" aria-labelledby="tituloListado" data-supabase-table="clientes">
+            <h2 id="tituloListado">Listado de clientes</h2>
+            <table class="table-customers">
+                <caption>Clientes registrados en el sistema</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaClientesBody">
+                    <tr>
+                        <td>Cliente de ejemplo</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Activo</td>
+                        <td>
+                            <a href="cliente_detalle.html">Ver</a>
+                            <a href="cliente_editar.html">Editar</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">Total de clientes: <span id="totalClientesListado">1</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

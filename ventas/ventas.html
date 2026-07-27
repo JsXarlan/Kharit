@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas | Kharit</title>
+    <meta name="description" content="Historial de ventas registradas en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="ventas.html" aria-current="page">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Ventas</h1>
+
+        <section class="section-toolbar" aria-labelledby="tituloBusqueda">
+            <h2 id="tituloBusqueda" class="visually-hidden">Buscar ventas</h2>
+            <form id="formBuscarVentas" class="form-search" action="#" method="get" role="search">
+                <div class="form-group">
+                    <label for="buscarVenta">Buscar por folio o cliente</label>
+                    <input type="search" id="buscarVenta" name="buscar" placeholder="Ej. V-0001" maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="filtrarFechaInicio">Desde</label>
+                    <input type="date" id="filtrarFechaInicio" name="fecha_inicio">
+                </div>
+
+                <div class="form-group">
+                    <label for="filtrarFechaFin">Hasta</label>
+                    <input type="date" id="filtrarFechaFin" name="fecha_fin">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="btnBuscarVentas" class="btn-primary">Buscar</button>
+                    <a href="venta_nueva.html" id="enlaceNuevaVenta" class="btn-primary">Registrar venta</a>
+                </div>
+            </form>
+        </section>
+
+        <section class="section-listado" aria-labelledby="tituloListado" data-supabase-table="ventas">
+            <h2 id="tituloListado">Historial de ventas</h2>
+            <table class="table-sales">
+                <caption>Ventas registradas en el sistema</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Folio</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaVentasBody">
+                    <tr>
+                        <td>V-0001</td>
+                        <td>2026-01-01</td>
+                        <td>Cliente de ejemplo</td>
+                        <td>$0.00</td>
+                        <td>Confirmada</td>
+                        <td><a href="venta_detalle.html">Ver</a></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">Total de ventas: <span id="totalVentasListado">1</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

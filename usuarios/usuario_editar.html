@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar usuario | Kharit</title>
+    <meta name="description" content="Editar la información de un usuario existente en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="usuarios.html" aria-current="page">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Editar usuario</h1>
+
+        <nav class="subnav" aria-label="Submenú de usuarios">
+            <ul>
+                <li><a href="usuarios.html" aria-current="page">Usuarios</a></li>
+                <li><a href="roles.html">Roles</a></li>
+                <li><a href="permisos.html">Permisos</a></li>
+            </ul>
+        </nav>
+
+        <form id="formUsuarioEditar" class="form-entity" action="#" method="post" data-supabase-table="usuarios" data-supabase-action="update" autocomplete="off" novalidate>
+            <input type="hidden" id="usuarioId" name="usuario_id" value="">
+
+            <fieldset>
+                <legend>Datos de acceso</legend>
+
+                <div class="form-group">
+                    <label for="nombreCompleto">Nombre completo</label>
+                    <input type="text" id="nombreCompleto" name="nombre_completo" maxlength="120" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailUsuario">Correo electrónico</label>
+                    <input type="email" id="emailUsuario" name="email" maxlength="150" readonly>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Rol y estado</legend>
+
+                <div class="form-group">
+                    <label for="rolUsuario">Rol</label>
+                    <select id="rolUsuario" name="rol_id" required>
+                        <option value="">Selecciona un rol</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="estadoUsuario">Estado</label>
+                    <select id="estadoUsuario" name="estado" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnActualizarUsuario" class="btn-primary">Guardar cambios</button>
+                <a href="usuarios.html" id="enlaceCancelarEdicionUsuario" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de compra | Kharit</title>
+    <meta name="description" content="Detalle de una compra registrada en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="compras.html" aria-current="page">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Detalle de compra</h1>
+
+        <section class="section-detalle" aria-labelledby="tituloDatosCompra" data-supabase-table="compras">
+            <h2 id="tituloDatosCompra">Datos de la compra</h2>
+            <dl class="detail-list">
+                <dt>Folio</dt>
+                <dd id="detalleFolio">C-0001</dd>
+
+                <dt>Fecha</dt>
+                <dd id="detalleFecha">2026-01-01</dd>
+
+                <dt>Proveedor</dt>
+                <dd id="detalleProveedor">Proveedor de ejemplo</dd>
+
+                <dt>Estado</dt>
+                <dd id="detalleEstado">Confirmada</dd>
+            </dl>
+        </section>
+
+        <section class="section-detalle" aria-labelledby="tituloProductosCompra" data-supabase-table="compra_detalle">
+            <h2 id="tituloProductosCompra">Productos comprados</h2>
+            <table class="table-purchase-detail">
+                <caption>Detalle de productos incluidos en esta compra</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio unitario</th>
+                        <th scope="col">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaDetalleCompraBody">
+                    <tr>
+                        <td colspan="4">No hay productos registrados en esta compra.</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Subtotal</td>
+                        <td id="detalleSubtotal">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Impuestos</td>
+                        <td id="detalleImpuestos">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Total</td>
+                        <td id="detalleTotal">$0.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <div class="form-actions">
+            <a href="compras.html" id="enlaceVolverListadoCompras" class="btn-secondary">Volver al listado</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

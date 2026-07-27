@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de proveedor | Kharit</title>
+    <meta name="description" content="Detalle completo de un proveedor registrado en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="proveedores.html" aria-current="page">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Detalle de proveedor</h1>
+
+        <section class="section-detalle" aria-labelledby="tituloDatosGenerales" data-supabase-table="proveedores">
+            <h2 id="tituloDatosGenerales">Datos generales</h2>
+            <dl class="detail-list">
+                <dt>Nombre comercial</dt>
+                <dd id="detalleNombreProveedor">Proveedor de ejemplo</dd>
+
+                <dt>Razón social</dt>
+                <dd id="detalleRazonSocial">—</dd>
+
+                <dt>RFC</dt>
+                <dd id="detalleRfc">—</dd>
+
+                <dt>Contacto</dt>
+                <dd id="detalleContacto">—</dd>
+
+                <dt>Teléfono</dt>
+                <dd id="detalleTelefono">—</dd>
+
+                <dt>Correo electrónico</dt>
+                <dd id="detalleEmail">—</dd>
+
+                <dt>Dirección</dt>
+                <dd id="detalleDireccion">—</dd>
+
+                <dt>Estado</dt>
+                <dd id="detalleEstado">Activo</dd>
+            </dl>
+        </section>
+
+        <section class="section-historial" aria-labelledby="tituloProductosProveedor" data-supabase-table="productos">
+            <h2 id="tituloProductosProveedor">Productos de este proveedor</h2>
+            <table class="table-products">
+                <caption>Productos suministrados por este proveedor</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">SKU</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Stock actual</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaProductosProveedorBody">
+                    <tr>
+                        <td colspan="3">Este proveedor aún no tiene productos asociados.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section-historial" aria-labelledby="tituloComprasProveedor" data-supabase-table="compras">
+            <h2 id="tituloComprasProveedor">Historial de compras</h2>
+            <table class="table-purchases">
+                <caption>Compras realizadas a este proveedor</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Folio</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaComprasProveedorBody">
+                    <tr>
+                        <td colspan="3">No hay compras registradas para este proveedor.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="form-actions">
+            <a href="proveedor_editar.html" id="enlaceEditarProveedor" class="btn-primary">Editar proveedor</a>
+            <a href="proveedores.html" id="enlaceVolverListadoProveedores" class="btn-secondary">Volver al listado</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles | Kharit</title>
+    <meta name="description" content="Listado de roles del sistema Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="usuarios.html" aria-current="page">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Roles</h1>
+
+        <nav class="subnav" aria-label="Submenú de usuarios">
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="roles.html" aria-current="page">Roles</a></li>
+                <li><a href="permisos.html">Permisos</a></li>
+            </ul>
+        </nav>
+
+        <section class="section-toolbar" aria-labelledby="tituloAcciones">
+            <h2 id="tituloAcciones" class="visually-hidden">Acciones de roles</h2>
+            <div class="form-actions">
+                <a href="rol_nuevo.html" id="enlaceNuevoRol" class="btn-primary">Agregar rol</a>
+            </div>
+        </section>
+
+        <!-- Tabla propia 'roles', independiente de los roles nativos de Supabase Auth. Protegida con Row Level Security -->
+        <section class="section-listado" aria-labelledby="tituloListado" data-supabase-table="roles">
+            <h2 id="tituloListado">Listado de roles</h2>
+            <table class="table-roles">
+                <caption>Roles disponibles en el sistema</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre del rol</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Usuarios asignados</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaRolesBody">
+                    <tr>
+                        <td>Administrador</td>
+                        <td>Acceso total al sistema</td>
+                        <td>1</td>
+                        <td><a href="rol_editar.html">Editar</a></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">Total de roles: <span id="totalRolesListado">1</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

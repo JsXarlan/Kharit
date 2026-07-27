@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo proveedor | Kharit</title>
+    <meta name="description" content="Registrar un nuevo proveedor en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="proveedores.html" aria-current="page">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Nuevo proveedor</h1>
+
+        <form id="formProveedorNuevo" class="form-entity" action="#" method="post" data-supabase-table="proveedores" autocomplete="off" novalidate>
+            <fieldset>
+                <legend>Datos generales</legend>
+
+                <div class="form-group">
+                    <label for="nombreProveedor">Nombre comercial</label>
+                    <input type="text" id="nombreProveedor" name="nombre_proveedor" placeholder="Ej. Distribuidora del Norte" maxlength="120" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="razonSocial">Razón social</label>
+                    <input type="text" id="razonSocial" name="razon_social" placeholder="Razón social fiscal" maxlength="150">
+                </div>
+
+                <div class="form-group">
+                    <label for="rfcProveedor">RFC</label>
+                    <input type="text" id="rfcProveedor" name="rfc" placeholder="Ej. XAXX010101000" maxlength="13" pattern="[A-Za-z0-9]{10,13}">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Contacto</legend>
+
+                <div class="form-group">
+                    <label for="contactoNombre">Nombre de contacto</label>
+                    <input type="text" id="contactoNombre" name="contacto_nombre" placeholder="Persona de contacto" maxlength="120">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefonoProveedor">Teléfono</label>
+                    <input type="tel" id="telefonoProveedor" name="telefono" placeholder="Ej. 5512345678" maxlength="15" pattern="[0-9+\-\s]*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailProveedor">Correo electrónico</label>
+                    <input type="email" id="emailProveedor" name="email" placeholder="proveedor@empresa.com" maxlength="150">
+                </div>
+
+                <div class="form-group">
+                    <label for="direccionProveedor">Dirección</label>
+                    <textarea id="direccionProveedor" name="direccion" rows="3" maxlength="250" placeholder="Dirección completa"></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Estado</legend>
+                <div class="form-group">
+                    <label for="estadoProveedor">Estado</label>
+                    <select id="estadoProveedor" name="estado" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnGuardarProveedor" class="btn-primary">Guardar proveedor</button>
+                <a href="proveedores.html" id="enlaceCancelarProveedor" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de cliente | Kharit</title>
+    <meta name="description" content="Detalle completo de un cliente registrado en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="clientes.html" aria-current="page">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Detalle de cliente</h1>
+
+        <section class="section-detalle" aria-labelledby="tituloDatosGenerales" data-supabase-table="clientes">
+            <h2 id="tituloDatosGenerales">Datos generales</h2>
+            <dl class="detail-list">
+                <dt>Nombre completo / Razón social</dt>
+                <dd id="detalleNombreCliente">Cliente de ejemplo</dd>
+
+                <dt>Tipo de cliente</dt>
+                <dd id="detalleTipoCliente">Persona física</dd>
+
+                <dt>RFC</dt>
+                <dd id="detalleRfc">—</dd>
+
+                <dt>Teléfono</dt>
+                <dd id="detalleTelefono">—</dd>
+
+                <dt>Correo electrónico</dt>
+                <dd id="detalleEmail">—</dd>
+
+                <dt>Dirección</dt>
+                <dd id="detalleDireccion">—</dd>
+
+                <dt>Estado</dt>
+                <dd id="detalleEstado">Activo</dd>
+            </dl>
+        </section>
+
+        <section class="section-historial" aria-labelledby="tituloVentasCliente" data-supabase-table="ventas">
+            <h2 id="tituloVentasCliente">Historial de ventas</h2>
+            <table class="table-sales">
+                <caption>Ventas realizadas a este cliente</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Folio</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaVentasClienteBody">
+                    <tr>
+                        <td colspan="3">No hay ventas registradas para este cliente.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="form-actions">
+            <a href="cliente_editar.html" id="enlaceEditarCliente" class="btn-primary">Editar cliente</a>
+            <a href="clientes.html" id="enlaceVolverListadoClientes" class="btn-secondary">Volver al listado</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

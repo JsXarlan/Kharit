@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de producto | Kharit</title>
+    <meta name="description" content="Detalle completo de un producto registrado en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="productos.html" aria-current="page">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Detalle de producto</h1>
+
+        <section class="section-detalle" aria-labelledby="tituloDatosGenerales" data-supabase-table="productos">
+            <h2 id="tituloDatosGenerales">Datos generales</h2>
+            <dl class="detail-list">
+                <dt>SKU</dt>
+                <dd id="detalleSku">SKU-0001</dd>
+
+                <dt>Nombre</dt>
+                <dd id="detalleNombre">Producto de ejemplo</dd>
+
+                <dt>Categoría</dt>
+                <dd id="detalleCategoria">Sin categoría</dd>
+
+                <dt>Proveedor</dt>
+                <dd id="detalleProveedor">Sin proveedor</dd>
+
+                <dt>Código de barras</dt>
+                <dd id="detalleCodigoBarras">—</dd>
+
+                <dt>Descripción</dt>
+                <dd id="detalleDescripcion">—</dd>
+
+                <dt>Estado</dt>
+                <dd id="detalleEstado">Activo</dd>
+            </dl>
+        </section>
+
+        <section class="section-detalle" aria-labelledby="tituloPrecios">
+            <h2 id="tituloPrecios">Precios</h2>
+            <dl class="detail-list">
+                <dt>Precio de compra</dt>
+                <dd id="detallePrecioCompra">$0.00</dd>
+
+                <dt>Precio de venta</dt>
+                <dd id="detallePrecioVenta">$0.00</dd>
+            </dl>
+        </section>
+
+        <section class="section-detalle" aria-labelledby="tituloInventario">
+            <h2 id="tituloInventario">Inventario</h2>
+            <dl class="detail-list">
+                <dt>Stock actual</dt>
+                <dd id="detalleStockActual">0</dd>
+
+                <dt>Stock mínimo</dt>
+                <dd id="detalleStockMinimo">0</dd>
+            </dl>
+        </section>
+
+        <section class="section-historial" aria-labelledby="tituloHistorialMovimientos" data-supabase-table="movimientos_inventario">
+            <h2 id="tituloHistorialMovimientos">Historial de movimientos</h2>
+            <table class="table-history">
+                <caption>Movimientos de inventario relacionados con este producto</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Usuario</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaHistorialMovimientosBody">
+                    <tr>
+                        <td colspan="4">Este producto aún no tiene movimientos registrados.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="form-actions">
+            <a href="producto_editar.html" id="enlaceEditarProducto" class="btn-primary">Editar producto</a>
+            <a href="productos.html" id="enlaceVolverListado" class="btn-secondary">Volver al listado</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

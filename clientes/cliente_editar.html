@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar cliente | Kharit</title>
+    <meta name="description" content="Editar la información de un cliente existente en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="clientes.html" aria-current="page">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Editar cliente</h1>
+
+        <form id="formClienteEditar" class="form-entity" action="#" method="post" data-supabase-table="clientes" data-supabase-action="update" autocomplete="off" novalidate>
+            <input type="hidden" id="clienteId" name="cliente_id" value="">
+
+            <fieldset>
+                <legend>Datos generales</legend>
+
+                <div class="form-group">
+                    <label for="nombreCliente">Nombre completo / Razón social</label>
+                    <input type="text" id="nombreCliente" name="nombre_cliente" maxlength="150" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoCliente">Tipo de cliente</label>
+                    <select id="tipoCliente" name="tipo_cliente" required>
+                        <option value="persona_fisica">Persona física</option>
+                        <option value="persona_moral">Persona moral</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="rfcCliente">RFC</label>
+                    <input type="text" id="rfcCliente" name="rfc" maxlength="13" pattern="[A-Za-z0-9]{10,13}">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Contacto</legend>
+
+                <div class="form-group">
+                    <label for="telefonoCliente">Teléfono</label>
+                    <input type="tel" id="telefonoCliente" name="telefono" maxlength="15" pattern="[0-9+\-\s]*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailCliente">Correo electrónico</label>
+                    <input type="email" id="emailCliente" name="email" maxlength="150">
+                </div>
+
+                <div class="form-group">
+                    <label for="direccionCliente">Dirección</label>
+                    <textarea id="direccionCliente" name="direccion" rows="3" maxlength="250"></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Estado</legend>
+                <div class="form-group">
+                    <label for="estadoCliente">Estado</label>
+                    <select id="estadoCliente" name="estado" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnActualizarCliente" class="btn-primary">Guardar cambios</button>
+                <a href="cliente_detalle.html" id="enlaceCancelarEdicionCliente" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

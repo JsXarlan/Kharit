@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar venta | Kharit</title>
+    <meta name="description" content="Registrar una nueva venta a cliente en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="ventas.html" aria-current="page">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Registrar venta</h1>
+
+        <form id="formVentaNueva" class="form-entity" action="#" method="post" data-supabase-table="ventas" autocomplete="off" novalidate>
+
+            <fieldset>
+                <legend>Datos de la venta</legend>
+
+                <div class="form-group">
+                    <label for="folioVenta">Folio</label>
+                    <input type="text" id="folioVenta" name="folio" placeholder="Se genera automáticamente" maxlength="20" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaVenta">Fecha</label>
+                    <input type="date" id="fechaVenta" name="fecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="clienteVenta">Cliente</label>
+                    <select id="clienteVenta" name="cliente_id" required>
+                        <option value="">Selecciona un cliente</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="metodoPagoVenta">Método de pago</label>
+                    <select id="metodoPagoVenta" name="metodo_pago" required>
+                        <option value="efectivo">Efectivo</option>
+                        <option value="tarjeta">Tarjeta</option>
+                        <option value="transferencia">Transferencia</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Detalle de productos</legend>
+                <!-- Nombres planos con sufijo numérico (no notación de arreglo) para que cada name= siga mapeando a una columna real de venta_detalle -->
+                <table class="table-sale-detail" data-supabase-table="venta_detalle">
+                    <caption>Productos incluidos en esta venta</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio unitario</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaDetalleVentaBody">
+                        <tr>
+                            <td>
+                                <label for="producto1" class="visually-hidden">Producto línea 1</label>
+                                <select id="producto1" name="producto_id_1">
+                                    <option value="">Selecciona un producto</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label for="cantidad1" class="visually-hidden">Cantidad línea 1</label>
+                                <input type="number" id="cantidad1" name="cantidad_1" min="1" step="1" placeholder="0">
+                            </td>
+                            <td>
+                                <label for="precioUnitario1" class="visually-hidden">Precio unitario línea 1</label>
+                                <input type="number" id="precioUnitario1" name="precio_unitario_1" min="0" step="0.01" placeholder="0.00">
+                            </td>
+                            <td id="subtotalLinea1">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="producto2" class="visually-hidden">Producto línea 2</label>
+                                <select id="producto2" name="producto_id_2">
+                                    <option value="">Selecciona un producto</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label for="cantidad2" class="visually-hidden">Cantidad línea 2</label>
+                                <input type="number" id="cantidad2" name="cantidad_2" min="1" step="1" placeholder="0">
+                            </td>
+                            <td>
+                                <label for="precioUnitario2" class="visually-hidden">Precio unitario línea 2</label>
+                                <input type="number" id="precioUnitario2" name="precio_unitario_2" min="0" step="0.01" placeholder="0.00">
+                            </td>
+                            <td id="subtotalLinea2">$0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><!-- En Fase 2, un botón con JS permitirá agregar/quitar líneas de producto dinámicamente --></p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Totales</legend>
+
+                <div class="form-group">
+                    <label for="subtotalVenta">Subtotal</label>
+                    <input type="number" id="subtotalVenta" name="subtotal" min="0" step="0.01" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="impuestosVenta">Impuestos</label>
+                    <input type="number" id="impuestosVenta" name="impuestos" min="0" step="0.01" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="totalVenta">Total</label>
+                    <input type="number" id="totalVenta" name="total" min="0" step="0.01" readonly>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnGuardarVenta" class="btn-primary">Registrar venta</button>
+                <a href="ventas.html" id="enlaceCancelarVenta" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

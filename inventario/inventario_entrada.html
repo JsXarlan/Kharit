@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar entrada | Kharit</title>
+    <meta name="description" content="Registrar una entrada manual de inventario en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="inventario_movimientos.html" aria-current="page">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Registrar entrada de inventario</h1>
+
+        <nav class="subnav" aria-label="Submenú de inventario">
+            <ul>
+                <li><a href="inventario_movimientos.html">Movimientos</a></li>
+                <li><a href="inventario_entrada.html" aria-current="page">Registrar entrada</a></li>
+                <li><a href="inventario_salida.html">Registrar salida</a></li>
+                <li><a href="inventario_ajuste.html">Registrar ajuste</a></li>
+                <li><a href="inventario_historial.html">Historial completo</a></li>
+            </ul>
+        </nav>
+
+        <form id="formInventarioEntrada" class="form-entity" action="#" method="post" data-supabase-table="movimientos_inventario" autocomplete="off" novalidate>
+            <input type="hidden" id="tipoMovimiento" name="tipo_movimiento" value="entrada">
+
+            <fieldset>
+                <legend>Datos de la entrada</legend>
+
+                <div class="form-group">
+                    <label for="productoEntrada">Producto</label>
+                    <select id="productoEntrada" name="producto_id" required>
+                        <option value="">Selecciona un producto</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidadEntrada">Cantidad</label>
+                    <input type="number" id="cantidadEntrada" name="cantidad" min="1" step="1" placeholder="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaEntrada">Fecha</label>
+                    <input type="date" id="fechaEntrada" name="fecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="motivoEntrada">Motivo</label>
+                    <select id="motivoEntrada" name="motivo" required>
+                        <option value="devolucion">Devolución de cliente</option>
+                        <option value="donacion">Donación</option>
+                        <option value="traslado_entrada">Traslado entre sucursales</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notasEntrada">Notas adicionales</label>
+                    <textarea id="notasEntrada" name="notas" rows="3" maxlength="300" placeholder="Detalles adicionales sobre esta entrada"></textarea>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnGuardarEntrada" class="btn-primary">Registrar entrada</button>
+                <a href="inventario_movimientos.html" id="enlaceCancelarEntrada" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

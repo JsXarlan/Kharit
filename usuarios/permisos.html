@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permisos | Kharit</title>
+    <meta name="description" content="Matriz de permisos por rol en el sistema Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="usuarios.html" aria-current="page">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Permisos</h1>
+
+        <nav class="subnav" aria-label="Submenú de usuarios">
+            <ul>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="roles.html">Roles</a></li>
+                <li><a href="permisos.html" aria-current="page">Permisos</a></li>
+            </ul>
+        </nav>
+
+        <p>Selecciona un rol para configurar qué módulos puede ver, crear, editar o eliminar. Esta matriz alimenta la tabla propia <code>rol_permiso</code>, protegida con Row Level Security en Supabase.</p>
+
+        <form id="formPermisos" class="form-entity" action="#" method="post" data-supabase-table="rol_permiso" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label for="rolPermisos">Rol a configurar</label>
+                <select id="rolPermisos" name="rol_id" required>
+                    <option value="">Selecciona un rol</option>
+                </select>
+            </div>
+
+            <fieldset>
+                <legend>Productos</legend>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoProductosVer" name="permisos[productos][ver]">
+                    <label for="permisoProductosVer">Ver</label>
+                </div>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoProductosCrear" name="permisos[productos][crear]">
+                    <label for="permisoProductosCrear">Crear</label>
+                </div>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoProductosEditar" name="permisos[productos][editar]">
+                    <label for="permisoProductosEditar">Editar</label>
+                </div>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoProductosEliminar" name="permisos[productos][eliminar]">
+                    <label for="permisoProductosEliminar">Eliminar</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Compras y ventas</legend>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoComprasVer" name="permisos[compras][ver]">
+                    <label for="permisoComprasVer">Ver compras</label>
+                </div>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoComprasCrear" name="permisos[compras][crear]">
+                    <label for="permisoComprasCrear">Registrar compras</label>
+                </div>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoVentasVer" name="permisos[ventas][ver]">
+                    <label for="permisoVentasVer">Ver ventas</label>
+                </div>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoVentasCrear" name="permisos[ventas][crear]">
+                    <label for="permisoVentasCrear">Registrar ventas</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Inventario</legend>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoInventarioVer" name="permisos[inventario][ver]">
+                    <label for="permisoInventarioVer">Ver movimientos</label>
+                </div>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoInventarioAjustar" name="permisos[inventario][ajustar]">
+                    <label for="permisoInventarioAjustar">Registrar ajustes</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Administración</legend>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoUsuariosGestionar" name="permisos[usuarios][gestionar]">
+                    <label for="permisoUsuariosGestionar">Gestionar usuarios y roles</label>
+                </div>
+                <div class="form-group form-group-inline">
+                    <input type="checkbox" id="permisoConfiguracionGestionar" name="permisos[configuracion][gestionar]">
+                    <label for="permisoConfiguracionGestionar">Gestionar configuración del sistema</label>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnGuardarPermisos" class="btn-primary">Guardar permisos</button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

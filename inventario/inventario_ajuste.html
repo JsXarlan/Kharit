@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar ajuste | Kharit</title>
+    <meta name="description" content="Registrar un ajuste de inventario por conteo físico en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="inventario_movimientos.html" aria-current="page">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="../perfil/perfil.html">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Registrar ajuste de inventario</h1>
+
+        <nav class="subnav" aria-label="Submenú de inventario">
+            <ul>
+                <li><a href="inventario_movimientos.html">Movimientos</a></li>
+                <li><a href="inventario_entrada.html">Registrar entrada</a></li>
+                <li><a href="inventario_salida.html">Registrar salida</a></li>
+                <li><a href="inventario_ajuste.html" aria-current="page">Registrar ajuste</a></li>
+                <li><a href="inventario_historial.html">Historial completo</a></li>
+            </ul>
+        </nav>
+
+        <form id="formInventarioAjuste" class="form-entity" action="#" method="post" data-supabase-table="movimientos_inventario" autocomplete="off" novalidate>
+            <input type="hidden" id="tipoMovimiento" name="tipo_movimiento" value="ajuste">
+
+            <fieldset>
+                <legend>Datos del ajuste</legend>
+
+                <div class="form-group">
+                    <label for="productoAjuste">Producto</label>
+                    <select id="productoAjuste" name="producto_id" required>
+                        <option value="">Selecciona un producto</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="stockSistemaAjuste">Stock según sistema</label>
+                    <input type="number" id="stockSistemaAjuste" name="stock_sistema" min="0" step="1" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="stockFisicoAjuste">Stock contado físicamente</label>
+                    <input type="number" id="stockFisicoAjuste" name="stock_fisico" min="0" step="1" placeholder="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaAjuste">Fecha</label>
+                    <input type="date" id="fechaAjuste" name="fecha" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Justificación</legend>
+                <p>Todo ajuste de inventario requiere una justificación obligatoria para fines de auditoría.</p>
+
+                <div class="form-group">
+                    <label for="motivoAjuste">Motivo del ajuste</label>
+                    <select id="motivoAjuste" name="motivo" required>
+                        <option value="conteo_fisico">Diferencia en conteo físico</option>
+                        <option value="error_captura">Corrección de error de captura</option>
+                        <option value="robo_perdida">Robo o pérdida</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="justificacionAjuste">Justificación detallada</label>
+                    <textarea id="justificacionAjuste" name="justificacion" rows="4" maxlength="500" placeholder="Describe el motivo del ajuste" required></textarea>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnGuardarAjuste" class="btn-primary">Registrar ajuste</button>
+                <a href="inventario_movimientos.html" id="enlaceCancelarAjuste" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

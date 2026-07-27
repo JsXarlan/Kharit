@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi perfil | Kharit</title>
+    <meta name="description" content="Información personal del usuario en Kharit.">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="site-header">
+        <p class="brand-name">Kharit</p>
+        <p class="user-session">Sesión activa: <span id="nombreUsuarioSesion">Usuario</span></p>
+        <a href="../login.html" id="enlaceCerrarSesion">Cerrar sesión</a>
+    </header>
+
+    <nav class="sidebar" aria-label="Navegación principal">
+        <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../productos/productos.html">Productos</a></li>
+            <li><a href="../categorias/categorias.html">Categorías</a></li>
+            <li><a href="../proveedores/proveedores.html">Proveedores</a></li>
+            <li><a href="../clientes/clientes.html">Clientes</a></li>
+            <li><a href="../compras/compras.html">Compras</a></li>
+            <li><a href="../ventas/ventas.html">Ventas</a></li>
+            <li><a href="../inventario/inventario_movimientos.html">Inventario</a></li>
+            <li><a href="../usuarios/usuarios.html">Usuarios</a></li>
+            <li><a href="perfil.html" aria-current="page">Perfil</a></li>
+            <li><a href="../configuracion/configuracion.html">Configuración</a></li>
+        </ul>
+    </nav>
+
+    <main class="content" id="contenido-principal">
+        <h1>Mi perfil</h1>
+
+        <nav class="subnav" aria-label="Submenú de perfil">
+            <ul>
+                <li><a href="perfil.html" aria-current="page">Información personal</a></li>
+                <li><a href="perfil_password.html">Cambiar contraseña</a></li>
+            </ul>
+        </nav>
+
+        <form id="formPerfil" class="form-entity" action="#" method="post" data-supabase-table="usuarios" data-supabase-action="update" autocomplete="off" novalidate>
+            <fieldset>
+                <legend>Información personal</legend>
+
+                <div class="form-group">
+                    <label for="nombreCompletoPerfil">Nombre completo</label>
+                    <input type="text" id="nombreCompletoPerfil" name="nombre_completo" maxlength="120" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailPerfil">Correo electrónico</label>
+                    <input type="email" id="emailPerfil" name="email" maxlength="150" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefonoPerfil">Teléfono</label>
+                    <input type="tel" id="telefonoPerfil" name="telefono" maxlength="15" pattern="[0-9+\-\s]*">
+                </div>
+
+                <div class="form-group">
+                    <label for="fotoPerfil">Foto de perfil</label>
+                    <input type="file" id="fotoPerfil" name="foto" accept="image/png, image/jpeg, image/webp">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Información de cuenta</legend>
+                <div class="form-group">
+                    <label for="rolPerfil">Rol asignado</label>
+                    <input type="text" id="rolPerfil" name="rol_nombre" readonly>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="btnGuardarPerfil" class="btn-primary">Guardar cambios</button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Kharit. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
