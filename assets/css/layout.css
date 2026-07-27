@@ -1,0 +1,160 @@
+/* Layout de páginas internas: header + sidebar + main + footer como hijos directos de body */
+body:has(> .sidebar) {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    grid-template-rows: var(--header-height) 1fr auto;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "sidebar footer";
+    min-height: 100vh;
+}
+
+body:has(> .sidebar) > .site-header { grid-area: header; }
+body:has(> .sidebar) > .sidebar { grid-area: sidebar; }
+body:has(> .sidebar) > .content { grid-area: main; }
+body:has(> .sidebar) > .site-footer { grid-area: footer; }
+
+/* Header (compartido por páginas internas y públicas) */
+.site-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: 0 var(--space-5);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.site-header .brand-name {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.site-header .brand-tagline {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+.site-header .user-session {
+    margin: 0 0 0 auto;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+.site-header #enlaceCerrarSesion {
+    color: var(--color-danger);
+    font-size: 0.875rem;
+}
+
+/* Sidebar (páginas internas) */
+.sidebar {
+    background-color: var(--color-sidebar-bg);
+    padding: var(--space-5) 0;
+    overflow-y: auto;
+}
+
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar a {
+    display: block;
+    padding: var(--space-3) var(--space-5);
+    color: var(--color-sidebar-text);
+    font-size: 0.9375rem;
+}
+
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    text-decoration: none;
+}
+
+.sidebar a[aria-current="page"] {
+    background-color: var(--color-primary);
+    color: var(--color-sidebar-text-active);
+    font-weight: 600;
+}
+
+/* Navegación pública (login, index, recuperar contraseña, errores) */
+.nav-public {
+    padding: var(--space-3) var(--space-5);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.nav-public ul {
+    display: flex;
+    gap: var(--space-4);
+}
+
+/* Contenido principal */
+.content {
+    padding: var(--space-6);
+    overflow-x: hidden;
+}
+
+.content > h1 {
+    margin-bottom: var(--space-5);
+}
+
+/* Submenús internos de un módulo (inventario, usuarios, perfil, configuración) */
+.subnav {
+    margin-bottom: var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.subnav ul {
+    display: flex;
+    gap: var(--space-5);
+}
+
+.subnav a {
+    display: inline-block;
+    padding: var(--space-2) 0 var(--space-3);
+    color: var(--color-text-muted);
+    border-bottom: 2px solid transparent;
+    font-size: 0.9375rem;
+}
+
+.subnav a:hover {
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.subnav a[aria-current="page"] {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Footer */
+.site-footer {
+    padding: var(--space-4) var(--space-5);
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+}
+
+body:not(:has(> .sidebar)) .site-footer {
+    margin-top: auto;
+}
+
+/* Páginas públicas: layout centrado en columna sin sidebar */
+body:not(:has(> .sidebar)) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body:not(:has(> .sidebar)) main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6) var(--space-4);
+}

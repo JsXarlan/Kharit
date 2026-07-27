@@ -1,0 +1,54 @@
+:root {
+    /* Color primario (azul corporativo) */
+    --color-primary: #2563eb;
+    --color-primary-dark: #1d4ed8;
+    --color-primary-light: #dbeafe;
+
+    /* Sidebar */
+    --color-sidebar-bg: #1e293b;
+    --color-sidebar-text: #cbd5e1;
+    --color-sidebar-text-active: #ffffff;
+
+    /* Superficies */
+    --color-bg: #f8fafc;
+    --color-surface: #ffffff;
+    --color-border: #e2e8f0;
+
+    /* Texto */
+    --color-text: #1e293b;
+    --color-text-muted: #64748b;
+
+    /* Estados */
+    --color-success: #16a34a;
+    --color-success-bg: #dcfce7;
+    --color-danger: #dc2626;
+    --color-danger-bg: #fee2e2;
+    --color-warning: #d97706;
+    --color-warning-bg: #fef3c7;
+
+    /* Espaciado (escala de 4px) */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* Radios y sombras */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+
+    /* Tipografía */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* Layout */
+    --sidebar-width: 240px;
+    --header-height: 64px;
+
+    /* Breakpoints (referencia; usados como valores literales en responsive.css) */
+    --breakpoint-mobile: 640px;
+}

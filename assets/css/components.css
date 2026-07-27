@@ -1,0 +1,284 @@
+/* Tratamiento tipo "tarjeta" para las secciones de contenido dentro de .content */
+.content > section,
+.content > form.form-entity {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5);
+    margin-bottom: var(--space-5);
+    overflow-x: auto;
+}
+
+.content > .section-toolbar {
+    padding: var(--space-4) var(--space-5);
+}
+
+.section-error {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-7);
+    max-width: 480px;
+    text-align: center;
+}
+
+.section-auth,
+.section-welcome {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-6);
+    width: 100%;
+    max-width: 420px;
+}
+
+/* Botones */
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    line-height: 1.4;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-bg);
+    text-decoration: none;
+}
+
+/* Formularios */
+form {
+    color: var(--color-text);
+}
+
+fieldset {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5) var(--space-5);
+    margin: 0 0 var(--space-5);
+}
+
+fieldset:last-of-type {
+    margin-bottom: var(--space-4);
+}
+
+legend {
+    padding: 0 var(--space-2);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-primary);
+}
+
+.form-group {
+    margin-bottom: var(--space-4);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--space-1);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+.form-group-inline {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.form-group-inline label {
+    margin-bottom: 0;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface);
+    transition: border-color 0.15s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--color-primary);
+}
+
+input[readonly] {
+    background-color: var(--color-bg);
+    color: var(--color-text-muted);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto;
+    padding: 0;
+}
+
+input[type="file"] {
+    padding: var(--space-1) 0;
+    border: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    margin-top: var(--space-4);
+}
+
+.form-links {
+    margin-top: var(--space-4);
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.form-search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-4);
+}
+
+.form-search .form-group {
+    flex: 1 1 180px;
+    margin-bottom: 0;
+}
+
+.form-search .form-actions {
+    margin-top: 0;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+}
+
+caption {
+    text-align: left;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    padding-bottom: var(--space-3);
+}
+
+thead th {
+    text-align: left;
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--color-bg);
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid var(--color-border);
+}
+
+tbody td {
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+}
+
+tbody tr:hover {
+    background-color: var(--color-bg);
+}
+
+tfoot td {
+    padding: var(--space-3);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg);
+}
+
+td a {
+    margin-right: var(--space-3);
+}
+
+/* Listas de detalle (páginas *_detalle.html) */
+.detail-list {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    row-gap: var(--space-3);
+}
+
+.detail-list dt {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.detail-list dd {
+    margin: 0;
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Tarjetas de indicadores (dashboard) */
+.card-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-4);
+}
+
+.card-indicador {
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg);
+}
+
+.card-indicador h3 {
+    margin: 0 0 var(--space-2);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.card-indicador p {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+/* Accesos rápidos (dashboard) */
+.quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
