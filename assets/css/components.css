@@ -3,7 +3,7 @@
 .content > form.form-entity {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     padding: var(--space-5);
     margin-bottom: var(--space-5);
@@ -17,8 +17,8 @@
 .section-error {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     padding: var(--space-7);
     max-width: 480px;
     text-align: center;
@@ -28,8 +28,8 @@
 .section-welcome {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     padding: var(--space-6);
     width: 100%;
     max-width: 420px;
@@ -46,29 +46,48 @@
     cursor: pointer;
     border: 1px solid transparent;
     line-height: 1.4;
+    transition: background-color var(--transition-base), border-color var(--transition-base),
+        box-shadow var(--transition-base), transform var(--transition-base);
 }
 
 .btn-primary {
     background-color: var(--color-primary);
     color: #ffffff;
     border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
     background-color: var(--color-primary-dark);
     border-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
     text-decoration: none;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary {
     background-color: var(--color-surface);
     color: var(--color-text);
-    border-color: var(--color-border);
+    border-color: var(--color-border-strong);
 }
 
 .btn-secondary:hover {
     background-color: var(--color-bg);
+    border-color: var(--color-text-muted);
     text-decoration: none;
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 /* Formularios */
@@ -81,6 +100,7 @@ fieldset {
     border-radius: var(--radius-md);
     padding: var(--space-4) var(--space-5) var(--space-5);
     margin: 0 0 var(--space-5);
+    background-color: rgba(148, 163, 184, 0.03);
 }
 
 fieldset:last-of-type {
@@ -121,16 +141,18 @@ select,
 textarea {
     width: 100%;
     padding: var(--space-2) var(--space-3);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-sm);
     background-color: var(--color-surface);
-    transition: border-color 0.15s ease;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 input:focus,
 select:focus,
 textarea:focus {
     border-color: var(--color-primary);
+    box-shadow: var(--shadow-focus);
+    outline: none;
 }
 
 input[readonly] {
@@ -196,22 +218,28 @@ caption {
 
 thead th {
     text-align: left;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-3);
     background-color: var(--color-bg);
     color: var(--color-text-muted);
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     border-bottom: 1px solid var(--color-border);
 }
 
 tbody td {
     padding: var(--space-3);
     border-bottom: 1px solid var(--color-border);
+    transition: background-color var(--transition-base);
 }
 
-tbody tr:hover {
-    background-color: var(--color-bg);
+tbody tr:nth-child(even) td {
+    background-color: rgba(148, 163, 184, 0.06);
+}
+
+tbody tr:hover td {
+    background-color: var(--color-primary-light);
 }
 
 tfoot td {
@@ -256,8 +284,15 @@ td a {
 .card-indicador {
     padding: var(--space-4);
     border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-primary);
     border-radius: var(--radius-md);
     background-color: var(--color-bg);
+    transition: box-shadow var(--transition-slow), transform var(--transition-slow);
+}
+
+.card-indicador:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
 }
 
 .card-indicador h3 {
@@ -287,19 +322,25 @@ td a {
 .js-feedback {
     display: block;
     margin-top: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
     font-size: 0.8125rem;
+    font-weight: 500;
 }
 
 .js-feedback--success {
-    color: var(--color-success);
+    color: #14532d;
+    background-color: var(--color-success-bg);
 }
 
 .js-feedback--error {
-    color: var(--color-danger);
+    color: #7f1d1d;
+    background-color: var(--color-danger-bg);
 }
 
 .js-feedback--neutral {
     color: var(--color-text-muted);
+    background-color: var(--color-bg);
 }
 
 /* Celda de subtotal con botón "quitar línea" (filas añadidas dinámicamente en compra/venta) */

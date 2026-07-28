@@ -2,10 +2,13 @@
     /* Color primario (azul corporativo) */
     --color-primary: #2563eb;
     --color-primary-dark: #1d4ed8;
+    --color-primary-darker: #1e40af;
     --color-primary-light: #dbeafe;
+    --color-primary-rgb: 37, 99, 235;
 
     /* Sidebar */
     --color-sidebar-bg: #1e293b;
+    --color-sidebar-bg-active: #16213a;
     --color-sidebar-text: #cbd5e1;
     --color-sidebar-text-active: #ffffff;
 
@@ -13,6 +16,7 @@
     --color-bg: #f8fafc;
     --color-surface: #ffffff;
     --color-border: #e2e8f0;
+    --color-border-strong: #cbd5e1;
 
     /* Texto */
     --color-text: #1e293b;
@@ -37,10 +41,17 @@
     --space-8: 64px;
 
     /* Radios y sombras */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05), 0 1px 1px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 8px 20px -4px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.05);
+    --shadow-lg: 0 16px 32px -8px rgba(15, 23, 42, 0.16), 0 4px 10px rgba(15, 23, 42, 0.06);
+    --shadow-focus: 0 0 0 3px rgba(var(--color-primary-rgb), 0.18);
+
+    /* Transiciones */
+    --transition-base: 0.15s ease;
+    --transition-slow: 0.25s ease;
 
     /* Tipografía */
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
