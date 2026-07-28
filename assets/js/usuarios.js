@@ -11,9 +11,9 @@
  * un usuario normal se autoasigne un rol, así que los campos Rol/Estado del
  * formulario se ocultan y se ignoran aquí.
  *
- * permisos.html (rol_permiso) se queda con el aviso "sin backend todavía"
- * de Fase 3 — la gestión granular de permisos por módulo queda para una
- * fase futura de RBAC completo.
+ * permisos.html (Fase 4c) guarda permisos reales en 'rol_permiso'; las
+ * políticas RLS de las 13 tablas restantes consultan tiene_permiso(modulo,
+ * accion) (función SQL creada en Fase 4c) en vez de solo pedir sesión activa.
  */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
     initListadoRoles();
     initRolNuevo();
     initRolEditar();
+
+    initPermisos();
 });
 
 function poblarSelectRoles(select) {
@@ -349,6 +351,103 @@ function initRolEditar() {
                 return;
             }
             window.location.href = 'roles.html';
+        });
+    });
+}
+
+/* ---------------------------------------------------------------------- */
+/* Permisos (Fase 4c)                                                     */
+/* ---------------------------------------------------------------------- */
+
+var MAPA_PERMISOS = [
+    { id: 'permisoProductosVer', modulo: 'productos', accion: 'ver' },
+    { id: 'permisoProductosCrear', modulo: 'productos', accion: 'crear' },
+    { id: 'permisoProductosEditar', modulo: 'productos', accion: 'editar' },
+    { id: 'permisoProductosEliminar', modulo: 'productos', accion: 'eliminar' },
+    { id: 'permisoComprasVer', modulo: 'compras', accion: 'ver' },
+    { id: 'permisoComprasCrear', modulo: 'compras', accion: 'crear' },
+    { id: 'permisoVentasVer', modulo: 'ventas', accion: 'ver' },
+    { id: 'permisoVentasCrear', modulo: 'ventas', accion: 'crear' },
+    { id: 'permisoInventarioVer', modulo: 'inventario', accion: 'ver' },
+    { id: 'permisoInventarioAjustar', modulo: 'inventario', accion: 'ajustar' },
+    { id: 'permisoUsuariosGestionar', modulo: 'usuarios', accion: 'gestionar' },
+    { id: 'permisoConfiguracionGestionar', modulo: 'configuracion', accion: 'gestionar' }
+];
+
+function initPermisos() {
+    var formulario = document.getElementById('formPermisos');
+    if (!formulario) {
+        return;
+    }
+
+    var selectRol = document.getElementById('rolPermisos');
+    poblarSelectRoles(selectRol);
+
+    function limpiarCheckboxes() {
+        MAPA_PERMISOS.forEach(function (item) {
+            var checkbox = document.getElementById(item.id);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+        });
+    }
+
+    function cargarPermisosDelRol(rolId) {
+        limpiarCheckboxes();
+        if (!rolId) {
+            return;
+        }
+
+        window.supabaseClient.from('rol_permiso').select('modulo, accion, permitido').eq('rol_id', rolId).then(function (resultado) {
+            if (resultado.error || !resultado.data) {
+                return;
+            }
+            resultado.data.forEach(function (fila) {
+                var item = MAPA_PERMISOS.filter(function (m) {
+                    return m.modulo === fila.modulo && m.accion === fila.accion;
+                })[0];
+                if (item) {
+                    var checkbox = document.getElementById(item.id);
+                    if (checkbox) {
+                        checkbox.checked = !!fila.permitido;
+                    }
+                }
+            });
+        });
+    }
+
+    selectRol.addEventListener('change', function () {
+        cargarPermisosDelRol(selectRol.value);
+    });
+
+    formulario.addEventListener('submit', function (evento) {
+        evento.preventDefault();
+        if (!formulario.checkValidity()) {
+            formulario.reportValidity();
+            return;
+        }
+
+        var rolId = selectRol.value;
+        var filas = MAPA_PERMISOS.map(function (item) {
+            var checkbox = document.getElementById(item.id);
+            return {
+                rol_id: rolId,
+                modulo: item.modulo,
+                accion: item.accion,
+                permitido: checkbox ? checkbox.checked : false
+            };
+        });
+
+        var boton = document.getElementById('btnGuardarPermisos');
+        boton.disabled = true;
+
+        window.supabaseClient.from('rol_permiso').upsert(filas, { onConflict: 'rol_id,modulo,accion' }).then(function (resultado) {
+            boton.disabled = false;
+            if (resultado.error) {
+                mostrarMensajeFormulario(formulario, resultado.error.message, 'error');
+                return;
+            }
+            mostrarMensajeFormulario(formulario, 'Permisos guardados correctamente.', 'success');
         });
     });
 }

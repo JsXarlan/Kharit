@@ -236,12 +236,21 @@ function initDiferenciaAjuste() {
 /* ---------------------------------------------------------------------- */
 
 function initAvisoSinBackend() {
-    // Los formularios de autenticación (data-supabase-auth) y el módulo
-    // Productos ya tienen lógica real (login.html, recuperar_password.html,
-    // perfil_password.html, productos/*.html) y quedan fuera de este aviso.
-    var formularios = document.querySelectorAll(
-        'form[data-supabase-table]:not([data-supabase-table="productos"])'
-    );
+    // A partir de Fase 4c, todos los formularios data-supabase-table tienen
+    // lógica real propia (catalogos.js, compras-ventas.js, inventario.js,
+    // configuracion.js, usuarios.js) y los de data-supabase-auth también
+    // (main.js). Este selector queda vacío hoy; se deja como red de
+    // seguridad para cualquier formulario nuevo que se agregue sin conectar.
+    var TABLAS_YA_CONECTADAS = [
+        'productos', 'categorias', 'proveedores', 'clientes',
+        'compras', 'ventas', 'movimientos_inventario',
+        'usuarios', 'roles', 'rol_permiso',
+        'configuracion_empresa', 'configuracion_impuestos', 'configuracion_moneda'
+    ];
+    var selectorExclusion = TABLAS_YA_CONECTADAS.map(function (tabla) {
+        return ':not([data-supabase-table="' + tabla + '"])';
+    }).join('');
+    var formularios = document.querySelectorAll('form[data-supabase-table]' + selectorExclusion);
 
     formularios.forEach(function (formulario) {
         formulario.addEventListener('submit', function (evento) {
