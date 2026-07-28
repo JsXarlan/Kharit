@@ -47,7 +47,7 @@ function poblarSelectUsuarios(select) {
    directamente vía PostgREST; se resuelve con una consulta aparte a la tabla
    pública 'usuarios' y se arma un mapa id → nombre_completo en el cliente. */
 function obtenerMapaUsuarios(ids) {
-    var idsUnicos = Array.prototype.filter.call(new Set(ids), Boolean);
+    var idsUnicos = Array.from(new Set(ids)).filter(Boolean);
     if (!idsUnicos.length) {
         return Promise.resolve({});
     }
