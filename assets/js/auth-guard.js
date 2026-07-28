@@ -46,6 +46,47 @@ function protegerPagina() {
                 });
             });
         }
+
+        ocultarModulosSinPermiso();
+    });
+}
+
+/* Oculta del sidebar los módulos a los que el usuario actual no tiene permiso
+   de ver/gestionar (Fase 4c). RLS ya bloquea los datos igual; esto es solo
+   para que la navegación no muestre enlaces que llevan a páginas vacías. */
+var MODULOS_SIDEBAR = [
+    { patron: 'productos/productos.html', modulo: 'productos', accion: 'ver' },
+    { patron: 'compras/compras.html', modulo: 'compras', accion: 'ver' },
+    { patron: 'ventas/ventas.html', modulo: 'ventas', accion: 'ver' },
+    { patron: 'inventario/inventario_movimientos.html', modulo: 'inventario', accion: 'ver' },
+    { patron: 'usuarios/usuarios.html', modulo: 'usuarios', accion: 'gestionar' },
+    { patron: 'configuracion/configuracion.html', modulo: 'configuracion', accion: 'gestionar' }
+];
+
+function ocultarModulosSinPermiso() {
+    var sidebar = document.querySelector('.sidebar');
+    if (!sidebar) {
+        return;
+    }
+
+    MODULOS_SIDEBAR.forEach(function (item) {
+        window.supabaseClient.rpc('tiene_permiso', { p_modulo: item.modulo, p_accion: item.accion }).then(function (resultado) {
+            if (resultado.error || resultado.data) {
+                return;
+            }
+
+            var enlaces = sidebar.querySelectorAll('a');
+            for (var i = 0; i < enlaces.length; i++) {
+                var href = enlaces[i].getAttribute('href') || '';
+                if (href.indexOf(item.patron) !== -1) {
+                    var li = enlaces[i].closest('li');
+                    if (li) {
+                        li.style.display = 'none';
+                    }
+                    break;
+                }
+            }
+        });
     });
 }
 

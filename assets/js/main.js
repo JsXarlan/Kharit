@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
     initCambiarPasswordForm();
     initRestablecerPassword();
     initIndicadoresDashboard();
+    initVentasDelDia();
+    initComprasDelMes();
+    initVentasProgramadas();
+    initActividadReciente();
     initListadoProductos();
     initProductoNuevo();
     initProductoEditar();
@@ -771,6 +775,38 @@ function initProductoDetalle() {
                 enlaceEditar.href = 'producto_editar.html?id=' + idProducto;
             }
         });
+
+    window.supabaseClient
+        .from('movimientos_inventario')
+        .select('fecha, tipo_movimiento, cantidad, usuario_id')
+        .eq('producto_id', idProducto)
+        .order('created_at', { ascending: false })
+        .then(function (resultado) {
+            var tbody = document.getElementById('tablaHistorialMovimientosBody');
+            if (!tbody || resultado.error) {
+                return;
+            }
+            if (!resultado.data.length) {
+                tbody.innerHTML = '<tr><td colspan="4">Este producto aún no tiene movimientos registrados.</td></tr>';
+                return;
+            }
+            var ids = resultado.data.map(function (movimiento) {
+                return movimiento.usuario_id;
+            });
+            obtenerMapaUsuarios(ids).then(function (mapaUsuarios) {
+                tbody.innerHTML = '';
+                resultado.data.forEach(function (movimiento) {
+                    var fila = document.createElement('tr');
+                    var tipoCapitalizado = movimiento.tipo_movimiento.charAt(0).toUpperCase() + movimiento.tipo_movimiento.slice(1);
+                    fila.innerHTML =
+                        '<td>' + escaparHtml(movimiento.fecha) + '</td>' +
+                        '<td>' + escaparHtml(tipoCapitalizado) + '</td>' +
+                        '<td>' + (movimiento.cantidad !== null ? movimiento.cantidad : '—') + '</td>' +
+                        '<td>' + escaparHtml(mapaUsuarios[movimiento.usuario_id] || '—') + '</td>';
+                    tbody.appendChild(fila);
+                });
+            });
+        });
 }
 
 /* ---------------------------------------------------------------------- */
@@ -827,4 +863,105 @@ function renderizarTablaStockBajo(productos) {
             '<td><a href="productos/producto_editar.html?id=' + producto.id + '">Editar</a></td>';
         tbody.appendChild(fila);
     });
+}
+
+function initVentasDelDia() {
+    var elemento = document.getElementById('indicadorVentasDia');
+    if (!elemento) {
+        return;
+    }
+
+    var hoy = new Date().toISOString().slice(0, 10);
+    window.supabaseClient.from('ventas').select('total').eq('fecha', hoy).then(function (resultado) {
+        if (resultado.error || !resultado.data) {
+            return;
+        }
+        var suma = resultado.data.reduce(function (acumulado, venta) {
+            return acumulado + Number(venta.total);
+        }, 0);
+        elemento.textContent = formatoMoneda(suma);
+    });
+}
+
+function initComprasDelMes() {
+    var elemento = document.getElementById('indicadorComprasMes');
+    if (!elemento) {
+        return;
+    }
+
+    var inicioMes = new Date().toISOString().slice(0, 8) + '01';
+    window.supabaseClient.from('compras').select('total').gte('fecha', inicioMes).then(function (resultado) {
+        if (resultado.error || !resultado.data) {
+            return;
+        }
+        var suma = resultado.data.reduce(function (acumulado, compra) {
+            return acumulado + Number(compra.total);
+        }, 0);
+        elemento.textContent = formatoMoneda(suma);
+    });
+}
+
+function initVentasProgramadas() {
+    var tbody = document.getElementById('tablaVentasFuturasBody');
+    if (!tbody) {
+        return;
+    }
+
+    var hoy = new Date().toISOString().slice(0, 10);
+    window.supabaseClient
+        .from('ventas')
+        .select('fecha, total, estado, clientes(nombre_cliente)')
+        .gt('fecha', hoy)
+        .order('fecha')
+        .limit(10)
+        .then(function (resultado) {
+            if (resultado.error || !resultado.data || !resultado.data.length) {
+                return;
+            }
+            tbody.innerHTML = '';
+            resultado.data.forEach(function (venta) {
+                var fila = document.createElement('tr');
+                fila.innerHTML =
+                    '<td>' + escaparHtml(venta.clientes ? venta.clientes.nombre_cliente : 'Sin cliente') + '</td>' +
+                    '<td>' + escaparHtml(venta.fecha) + '</td>' +
+                    '<td>' + formatoMoneda(venta.total) + '</td>' +
+                    '<td>' + escaparHtml(venta.estado) + '</td>';
+                tbody.appendChild(fila);
+            });
+        });
+}
+
+function initActividadReciente() {
+    var tbody = document.getElementById('tablaActividadRecienteBody');
+    if (!tbody) {
+        return;
+    }
+
+    window.supabaseClient
+        .from('movimientos_inventario')
+        .select('created_at, tipo_movimiento, motivo, usuario_id')
+        .order('created_at', { ascending: false })
+        .limit(8)
+        .then(function (resultado) {
+            if (resultado.error || !resultado.data || !resultado.data.length) {
+                return;
+            }
+            var ids = resultado.data.map(function (movimiento) {
+                return movimiento.usuario_id;
+            });
+            obtenerMapaUsuarios(ids).then(function (mapaUsuarios) {
+                tbody.innerHTML = '';
+                resultado.data.forEach(function (movimiento) {
+                    var fila = document.createElement('tr');
+                    var fecha = new Date(movimiento.created_at).toLocaleString('es-MX');
+                    var tipoCapitalizado = movimiento.tipo_movimiento.charAt(0).toUpperCase() + movimiento.tipo_movimiento.slice(1);
+                    fila.innerHTML =
+                        '<td>' + escaparHtml(fecha) + '</td>' +
+                        '<td>' + escaparHtml(mapaUsuarios[movimiento.usuario_id] || '—') + '</td>' +
+                        '<td>' + escaparHtml(tipoCapitalizado) + '</td>' +
+                        '<td>' + escaparHtml(movimiento.motivo || '—') + '</td>';
+                    tbody.appendChild(fila);
+                });
+            });
+        });
 }
