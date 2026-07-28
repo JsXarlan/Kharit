@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initLoginForm();
     initRecuperarPasswordForm();
     initCambiarPasswordForm();
+    initRestablecerPassword();
     initIndicadoresDashboard();
     initListadoProductos();
     initProductoNuevo();
@@ -354,7 +355,9 @@ function initRecuperarPasswordForm() {
         var boton = document.getElementById('btnEnviarEnlace');
         boton.disabled = true;
 
-        window.supabaseClient.auth.resetPasswordForEmail(email).then(function (resultado) {
+        window.supabaseClient.auth.resetPasswordForEmail(email, {
+            redirectTo: KHARIT_SITE_URL + 'restablecer_password.html'
+        }).then(function (resultado) {
             boton.disabled = false;
             if (resultado.error) {
                 mostrarMensajeFormulario(formulario, resultado.error.message, 'error');
@@ -404,6 +407,38 @@ function initCambiarPasswordForm() {
             }
             mostrarMensajeFormulario(formulario, 'Contraseña actualizada correctamente.', 'success');
             formulario.reset();
+        });
+    });
+}
+
+function initRestablecerPassword() {
+    var formulario = document.getElementById('formRestablecerPassword');
+    if (!formulario) {
+        return;
+    }
+
+    formulario.addEventListener('submit', function (evento) {
+        evento.preventDefault();
+        if (!formulario.checkValidity()) {
+            formulario.reportValidity();
+            return;
+        }
+
+        var passwordNueva = document.getElementById('passwordNueva').value;
+        var boton = document.getElementById('btnRestablecerPassword');
+        boton.disabled = true;
+
+        window.supabaseClient.auth.updateUser({ password: passwordNueva }).then(function (resultado) {
+            boton.disabled = false;
+            if (resultado.error) {
+                mostrarMensajeFormulario(formulario, resultado.error.message, 'error');
+                return;
+            }
+            mostrarMensajeFormulario(formulario, 'Contraseña actualizada. Ya puedes iniciar sesión.', 'success');
+            formulario.reset();
+            setTimeout(function () {
+                window.location.href = 'login.html';
+            }, 2000);
         });
     });
 }

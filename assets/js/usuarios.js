@@ -207,12 +207,18 @@ function initUsuarioNuevo() {
             email: email,
             password: password,
             options: {
-                data: { nombre_completo: nombreCompleto }
+                data: { nombre_completo: nombreCompleto },
+                emailRedirectTo: KHARIT_SITE_URL + 'login.html'
             }
         }).then(function (resultado) {
             boton.disabled = false;
             if (resultado.error) {
                 mostrarMensajeFormulario(formulario, resultado.error.message, 'error');
+                return;
+            }
+            if (!resultado.data.session) {
+                mostrarMensajeFormulario(formulario, 'Cuenta creada. Revisa tu correo para confirmarla antes de iniciar sesión.', 'success');
+                formulario.reset();
                 return;
             }
             window.location.href = '../login.html';
