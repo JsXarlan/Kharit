@@ -16,6 +16,12 @@ function protegerPagina() {
         return;
     }
 
+    // usuario_nuevo.html pasó a ser autoregistro público (Fase 4b): un visitante
+    // sin sesión debe poder llegar a ella sin que el guard lo redirija a login.
+    if (location.pathname.indexOf('usuario_nuevo.html') !== -1) {
+        return;
+    }
+
     var prefijo = obtenerPrefijoRutaAssets('auth-guard.js');
 
     window.supabaseClient.auth.getSession().then(function (resultado) {
