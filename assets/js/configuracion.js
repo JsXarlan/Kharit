@@ -39,6 +39,14 @@ function initConfiguracionEmpresa() {
         document.getElementById('rfcEmpresa').value = empresa.rfc_empresa || '';
         document.getElementById('direccionEmpresa').value = empresa.direccion_empresa || '';
         document.getElementById('telefonoEmpresa').value = empresa.telefono_empresa || '';
+
+        if (empresa.logo) {
+            var imagen = document.createElement('img');
+            imagen.src = empresa.logo;
+            imagen.alt = 'Logo de la empresa';
+            imagen.className = 'imagen-detalle';
+            document.getElementById('logoEmpresa').insertAdjacentElement('afterend', imagen);
+        }
     });
 
     formulario.addEventListener('submit', function (evento) {
@@ -48,17 +56,31 @@ function initConfiguracionEmpresa() {
             return;
         }
 
-        var datos = {
-            nombre_empresa: document.getElementById('nombreEmpresa').value || null,
-            rfc_empresa: document.getElementById('rfcEmpresa').value || null,
-            direccion_empresa: document.getElementById('direccionEmpresa').value || null,
-            telefono_empresa: document.getElementById('telefonoEmpresa').value || null
-        };
-
         var boton = document.getElementById('btnGuardarEmpresa');
         boton.disabled = true;
 
-        upsertConfiguracion('configuracion_empresa', datos).then(function (resultado) {
+        subirArchivo('empresa', document.getElementById('logoEmpresa')).then(function (subida) {
+            if (subida && subida.error) {
+                boton.disabled = false;
+                mostrarMensajeFormulario(formulario, 'No se pudo subir el logo: ' + subida.error.message, 'error');
+                return null;
+            }
+
+            var datos = {
+                nombre_empresa: document.getElementById('nombreEmpresa').value || null,
+                rfc_empresa: document.getElementById('rfcEmpresa').value || null,
+                direccion_empresa: document.getElementById('direccionEmpresa').value || null,
+                telefono_empresa: document.getElementById('telefonoEmpresa').value || null
+            };
+            if (subida && subida.url) {
+                datos.logo = subida.url;
+            }
+
+            return upsertConfiguracion('configuracion_empresa', datos);
+        }).then(function (resultado) {
+            if (!resultado) {
+                return;
+            }
             boton.disabled = false;
             if (resultado.error) {
                 mostrarMensajeFormulario(formulario, resultado.error.message, 'error');

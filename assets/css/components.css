@@ -337,3 +337,13 @@ td a {
 .btn-toggle-password:hover {
     text-decoration: underline;
 }
+
+/* Imágenes insertadas por JS (Fase 4d): foto de producto/perfil, logo de empresa */
+.imagen-detalle {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-4);
+}

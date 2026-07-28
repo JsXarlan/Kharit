@@ -41,6 +41,14 @@ function initPerfil() {
                 var perfil = resultado.data;
                 document.getElementById('nombreCompletoPerfil').value = perfil.nombre_completo || '';
                 document.getElementById('rolPerfil').value = perfil.roles ? perfil.roles.nombre_rol : 'Sin rol asignado';
+
+                if (perfil.foto) {
+                    var imagen = document.createElement('img');
+                    imagen.src = perfil.foto;
+                    imagen.alt = 'Foto de perfil';
+                    imagen.className = 'imagen-detalle';
+                    document.getElementById('fotoPerfil').insertAdjacentElement('afterend', imagen);
+                }
             });
     });
 
@@ -57,14 +65,28 @@ function initPerfil() {
                 return;
             }
 
-            var cambios = {
-                nombre_completo: document.getElementById('nombreCompletoPerfil').value
-            };
-
             var boton = document.getElementById('btnGuardarPerfil');
             boton.disabled = true;
 
-            window.supabaseClient.from('usuarios').update(cambios).eq('id', usuario.id).then(function (resultado) {
+            subirArchivo('perfiles', document.getElementById('fotoPerfil')).then(function (subida) {
+                if (subida && subida.error) {
+                    boton.disabled = false;
+                    mostrarMensajeFormulario(formulario, 'No se pudo subir la foto: ' + subida.error.message, 'error');
+                    return null;
+                }
+
+                var cambios = {
+                    nombre_completo: document.getElementById('nombreCompletoPerfil').value
+                };
+                if (subida && subida.url) {
+                    cambios.foto = subida.url;
+                }
+
+                return window.supabaseClient.from('usuarios').update(cambios).eq('id', usuario.id);
+            }).then(function (resultado) {
+                if (!resultado) {
+                    return;
+                }
                 boton.disabled = false;
                 if (resultado.error) {
                     mostrarMensajeFormulario(formulario, resultado.error.message, 'error');

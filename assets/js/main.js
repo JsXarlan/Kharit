@@ -474,6 +474,26 @@ function escaparHtml(texto) {
     return div.innerHTML;
 }
 
+/* Sube un archivo al bucket público 'archivos' (Fase 4d) y devuelve su URL
+   pública, o null si el input no tiene ningún archivo seleccionado. */
+function subirArchivo(carpeta, inputArchivo) {
+    if (!inputArchivo || !inputArchivo.files || !inputArchivo.files[0]) {
+        return Promise.resolve(null);
+    }
+
+    var archivo = inputArchivo.files[0];
+    var nombreLimpio = archivo.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    var ruta = carpeta + '/' + Date.now() + '-' + nombreLimpio;
+
+    return window.supabaseClient.storage.from('archivos').upload(ruta, archivo).then(function (resultado) {
+        if (resultado.error) {
+            return { url: null, error: resultado.error };
+        }
+        var publico = window.supabaseClient.storage.from('archivos').getPublicUrl(resultado.data.path);
+        return { url: publico.data.publicUrl, error: null };
+    });
+}
+
 function poblarSelectCategorias(select) {
     if (!select) {
         return Promise.resolve();
@@ -632,25 +652,37 @@ function initProductoNuevo() {
             return;
         }
 
-        var nuevoProducto = {
-            nombre_producto: document.getElementById('nombreProducto').value,
-            sku: document.getElementById('skuProducto').value,
-            codigo_barras: document.getElementById('codigoBarras').value || null,
-            descripcion: document.getElementById('descripcionProducto').value || null,
-            categoria_id: document.getElementById('categoriaProducto').value || null,
-            proveedor_id: document.getElementById('proveedorProducto').value || null,
-            unidad_medida: document.getElementById('unidadMedida').value,
-            precio_compra: parseFloat(document.getElementById('precioCompra').value) || 0,
-            precio_venta: parseFloat(document.getElementById('precioVenta').value) || 0,
-            stock_actual: parseInt(document.getElementById('stockInicial').value, 10) || 0,
-            stock_minimo: parseInt(document.getElementById('stockMinimo').value, 10) || 0,
-            estado: document.getElementById('estadoProducto').value
-        };
-
         var boton = document.getElementById('btnGuardarProducto');
         boton.disabled = true;
 
-        window.supabaseClient.from('productos').insert(nuevoProducto).then(function (resultado) {
+        subirArchivo('productos', document.getElementById('imagenProducto')).then(function (subida) {
+            if (subida && subida.error) {
+                boton.disabled = false;
+                mostrarMensajeFormulario(formulario, 'No se pudo subir la imagen: ' + subida.error.message, 'error');
+                return null;
+            }
+
+            var nuevoProducto = {
+                nombre_producto: document.getElementById('nombreProducto').value,
+                sku: document.getElementById('skuProducto').value,
+                codigo_barras: document.getElementById('codigoBarras').value || null,
+                descripcion: document.getElementById('descripcionProducto').value || null,
+                categoria_id: document.getElementById('categoriaProducto').value || null,
+                proveedor_id: document.getElementById('proveedorProducto').value || null,
+                unidad_medida: document.getElementById('unidadMedida').value,
+                imagen: subida ? subida.url : null,
+                precio_compra: parseFloat(document.getElementById('precioCompra').value) || 0,
+                precio_venta: parseFloat(document.getElementById('precioVenta').value) || 0,
+                stock_actual: parseInt(document.getElementById('stockInicial').value, 10) || 0,
+                stock_minimo: parseInt(document.getElementById('stockMinimo').value, 10) || 0,
+                estado: document.getElementById('estadoProducto').value
+            };
+
+            return window.supabaseClient.from('productos').insert(nuevoProducto);
+        }).then(function (resultado) {
+            if (!resultado) {
+                return;
+            }
             boton.disabled = false;
             if (resultado.error) {
                 mostrarMensajeFormulario(formulario, resultado.error.message, 'error');
@@ -708,24 +740,38 @@ function initProductoEditar() {
             return;
         }
 
-        var cambios = {
-            nombre_producto: document.getElementById('nombreProducto').value,
-            sku: document.getElementById('skuProducto').value,
-            codigo_barras: document.getElementById('codigoBarras').value || null,
-            descripcion: document.getElementById('descripcionProducto').value || null,
-            categoria_id: document.getElementById('categoriaProducto').value || null,
-            proveedor_id: document.getElementById('proveedorProducto').value || null,
-            unidad_medida: document.getElementById('unidadMedida').value,
-            precio_compra: parseFloat(document.getElementById('precioCompra').value) || 0,
-            precio_venta: parseFloat(document.getElementById('precioVenta').value) || 0,
-            stock_minimo: parseInt(document.getElementById('stockMinimo').value, 10) || 0,
-            estado: document.getElementById('estadoProducto').value
-        };
-
         var boton = document.getElementById('btnActualizarProducto');
         boton.disabled = true;
 
-        window.supabaseClient.from('productos').update(cambios).eq('id', idProducto).then(function (resultado) {
+        subirArchivo('productos', document.getElementById('imagenProducto')).then(function (subida) {
+            if (subida && subida.error) {
+                boton.disabled = false;
+                mostrarMensajeFormulario(formulario, 'No se pudo subir la imagen: ' + subida.error.message, 'error');
+                return null;
+            }
+
+            var cambios = {
+                nombre_producto: document.getElementById('nombreProducto').value,
+                sku: document.getElementById('skuProducto').value,
+                codigo_barras: document.getElementById('codigoBarras').value || null,
+                descripcion: document.getElementById('descripcionProducto').value || null,
+                categoria_id: document.getElementById('categoriaProducto').value || null,
+                proveedor_id: document.getElementById('proveedorProducto').value || null,
+                unidad_medida: document.getElementById('unidadMedida').value,
+                precio_compra: parseFloat(document.getElementById('precioCompra').value) || 0,
+                precio_venta: parseFloat(document.getElementById('precioVenta').value) || 0,
+                stock_minimo: parseInt(document.getElementById('stockMinimo').value, 10) || 0,
+                estado: document.getElementById('estadoProducto').value
+            };
+            if (subida && subida.url) {
+                cambios.imagen = subida.url;
+            }
+
+            return window.supabaseClient.from('productos').update(cambios).eq('id', idProducto);
+        }).then(function (resultado) {
+            if (!resultado) {
+                return;
+            }
             boton.disabled = false;
             if (resultado.error) {
                 mostrarMensajeFormulario(formulario, resultado.error.message, 'error');
@@ -758,6 +804,13 @@ function initProductoDetalle() {
             }
 
             var producto = resultado.data;
+            if (producto.imagen) {
+                var imagen = document.createElement('img');
+                imagen.src = producto.imagen;
+                imagen.alt = 'Imagen de ' + producto.nombre_producto;
+                imagen.className = 'imagen-detalle';
+                document.getElementById('tituloDatosGenerales').insertAdjacentElement('afterend', imagen);
+            }
             document.getElementById('detalleSku').textContent = producto.sku;
             document.getElementById('detalleNombre').textContent = producto.nombre_producto;
             document.getElementById('detalleCategoria').textContent = producto.categorias ? producto.categorias.nombre_categoria : 'Sin categoría';
